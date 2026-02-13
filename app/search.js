@@ -5,7 +5,8 @@ import styles from './styles.js'
 
 const Search = (props) => {
 	const [searchText, setSearchText] = useState("");
-	const {options} = props;
+	//const {options} = props;
+	const options = ["84 Prospect Ave"];
 	const [filteredOptions, setFilteredOptions] = useState(options);
 	const [open, setOpen] = useState(0);
 	const filterOptions = (text) => {

@@ -26,30 +26,9 @@ const Bus = (props) => {
 	const [sheetList, setSheetList] = useState(() => []);
 	const [sheetBusPos, setSheetBusPos] = useState(0);
 	useEffect(() => {
-		if(props.doSearch == false) return;
+		if(props.doSearch == false || props.searchStop !="84 Prospect Ave") return;
 		const fetch = async() => {
-			let tmp = []
-			let ids = new Set();
-			if(props.searchStop in stops){
-				for(const route of routesInStop[stops[props.searchStop]]){
-					const ret = await track.getStop(stops[props.searchStop], route[0], route[1]);
-					const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-					for(const val of Object.values(ret)[0]){
-						if(val.eta !== "no vehicles" && !ids.has(val.busName)){
-							tmp.push([data.routes[route[0]][0], val.eta, data.routes[route[0]][1], val.busName]);
-							ids.add(val.busName);
-						}
-					}
-					await delay(200);
-				}
-			}
-			try{
-				tmp.sort(cmp);
-			}
-			catch(err){
-				console.log(err);
-			}
-			//console.log(tmp);
+			let tmp = [["Route 27", "arriving", "#ff00ff", "1010"]];
 			setBuses(tmp);
 			props.setDoSearch(false);
 		}
@@ -58,7 +37,7 @@ const Bus = (props) => {
 
 	const BusItem = (props) => {
 		return(
-			<TouchableOpacity>
+			<TouchableOpacity onPress={() => {props.setVisible(true)}}>
 				<View style={styles.busitem}>
 					<View style={[styles.busbar, {backgroundColor: props.color}]}></View>
 					<View style={{flex: 20}}>
@@ -78,7 +57,7 @@ const Bus = (props) => {
 				{buses.map((item, index) => {
 
 					if(item[1] !== "no vehicles")
-						return <BusItem key={item[3]} line={item[0]} color={item[2]} time={item[1]} id={item[3]}/>
+						return <BusItem key={item[3]} line={item[0]} color={item[2]} time={item[1]} id={item[3]} setVisible={props.setVisible}/>
 				})}
 			</ScrollView>
 		</View>

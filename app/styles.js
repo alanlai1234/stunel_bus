@@ -91,6 +91,47 @@ const styles = StyleSheet.create({
 		height: 45,
 		marginRight: 10,
 		borderRadius: 5,
+	},
+	centeredView: {
+    flex: 1,
+		margin: 50,
+		marginTop: 200,
+		marginBottom: 200,
+		backgroundColor: '#636d80',
+		borderRadius: 20,
+		borderWidth: 5,
+		borderColor: '#5a9641',
+		padding: 15,
+    alignItems: 'center',
+		shadowOffset: { width: 0, height: 1 },
+		shadowOpacity: 0.7,
+		shadowRadius: 3,
+		elevation: 5,
+  },
+	modalText: {
+		color: 'white',
+		fontSize: 25,
+		marginBottom: 50,
+	},
+	modalText2: {
+		color: 'white',
+		fontSize: 17,
+	},
+	modalItem: {
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		padding: 5,
+		flexDirection: 'row',
+		backgroundColor: '#464e5e',
+		width: '100%',
+		height: 60,
+		borderRadius: 15,
+	},
+	modalbtn:{
+		color: 'white',
+		padding: 10,
+		backgroundColor: 'blue',
+		borderRadius: 15,
 	}
 });
 

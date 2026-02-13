@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {View, TextInput, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {Modal, View, TextInput, TouchableWithoutFeedback, Keyboard, Text, TouchableOpacity} from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import * as Notifications from 'expo-notifications';
 import Search from './search.js'
@@ -63,16 +63,26 @@ const Home = () => {
 		});
 	};
 
+	const [visible, setVisible] = useState(false); 
 	return (
 		<SafeAreaProvider>
-		<TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
-			<SafeAreaView style={styles.main}>
+			<TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
+				<SafeAreaView style={styles.main}>
+					<Modal transparent={true} animationType="fade" visible={visible} onRequestClose={() => (setVisible(0))}>
+					  <View style={styles.centeredView}>
+						  <Text style={styles.modalText}>恭喜獲得以下獎品！</Text>
+						<View style={styles.modalItem}>
+							<Text style={styles.modalText2}>早餐兌換券</Text>
+							<TouchableOpacity><Text style={styles.modalbtn}>取得</Text></TouchableOpacity>
+						</View>
+					  </View>
+					</Modal>
 					<Search options={options1} setSearchStop={setSearchStop} setDoSearch={setDoSearch}/>
-					<Bus stops={stops1} routesInStop={routesInStop1}
+					<Bus stops={stops1} routesInStop={routesInStop1} setVisible={setVisible}
 						searchStop={searchStop} setDoSearch={setDoSearch} doSearch={doSearch}/>
 					<Navbar not={sendNot}/>
-			</SafeAreaView>
-		</TouchableWithoutFeedback>
+				</SafeAreaView>
+			</TouchableWithoutFeedback>
 		</SafeAreaProvider>
 	);
 }
